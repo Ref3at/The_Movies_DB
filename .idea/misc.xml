@@ -8,7 +8,11 @@
         <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.13697916666666668" />
         <entry key="app/src/main/res/layout/fragment_favorites.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/fragment_now_playing.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/fragment_popular.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/fragment_top_rated.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/fragment_up_coming.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/menu/favorites_menu.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/menu/main_menu.xml" value="0.28229166666666666" />
       </map>

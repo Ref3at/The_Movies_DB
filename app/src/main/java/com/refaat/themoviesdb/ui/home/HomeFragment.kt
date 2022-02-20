@@ -3,12 +3,17 @@ package com.refaat.themoviesdb.ui.home
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavAction
 import androidx.navigation.NavDirections
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
+import com.google.android.material.tabs.TabLayoutMediator
 import com.refaat.themoviesdb.R
 import com.refaat.themoviesdb.databinding.FragmentHomeBinding
+import com.refaat.themoviesdb.ui.home.tabLayoutPages.NowPlayingFragment
+import com.refaat.themoviesdb.ui.home.tabLayoutPages.PopularFragment
+import com.refaat.themoviesdb.ui.home.tabLayoutPages.TopRatedFragment
+import com.refaat.themoviesdb.ui.home.tabLayoutPages.UpComingFragment
 
 class HomeFragment : Fragment() {
 
@@ -39,6 +44,48 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+
+        val fragmentList = arrayListOf(
+            Pair("Now Playing", NowPlayingFragment()),
+            Pair("Popular", PopularFragment()),
+            Pair("Top Rated", TopRatedFragment()),
+            Pair("Up Coming", UpComingFragment())
+        )
+        val homeFragmentStateAdapter = HomeFragmentStateAdapter(fragmentList, this)
+
+        binding.viewPager.adapter = homeFragmentStateAdapter
+        binding.viewPager.offscreenPageLimit = fragmentList.size
+        binding.viewPager.isUserInputEnabled = false
+        binding.viewPager.isHorizontalScrollBarEnabled = false
+
+
+        fragmentList.forEach {
+            val tab = binding.tabLayout.newTab()
+            tab.text = it.first
+            binding.tabLayout.addTab(tab)
+        }
+
+        binding.tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                binding.viewPager.setCurrentItem(tab.position, false)
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab) {}
+            override fun onTabReselected(tab: TabLayout.Tab) {}
+        })
+
+
+
+
+
+
+
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+            tab.text = fragmentList[position].first
+        }.attach()
+    }
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
