@@ -1,7 +1,8 @@
-package com.refaat.themoviesdb
+package com.refaat.themoviesdb.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.refaat.themoviesdb.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
