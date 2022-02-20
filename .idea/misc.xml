@@ -6,6 +6,11 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/fragment_about.xml" value="0.13697916666666668" />
         <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.13697916666666668" />
+        <entry key="app/src/main/res/layout/fragment_favorites.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/menu/favorites_menu.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/menu/main_menu.xml" value="0.28229166666666666" />
       </map>
     </option>
   </component>
