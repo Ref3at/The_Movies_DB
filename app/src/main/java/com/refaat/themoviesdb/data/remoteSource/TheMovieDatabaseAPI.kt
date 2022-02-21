@@ -23,7 +23,7 @@ interface TheMovieDatabaseAPI {
 
     //Get Popular Movies
     @GET("movie/popular")
-    suspend fun getPopularMovies(@Query(PARAM_PAGE) page: Int)
+    suspend fun getPopularMovies(@Query(PARAM_PAGE) page: Int):MoviesDto
 
     //Get Top Rated Movies
     @GET("movie/top_rated")

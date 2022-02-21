@@ -24,18 +24,14 @@ import kotlinx.coroutines.launch
 class NowPlayingFragment : Fragment() {
 
     private val viewModel: NowPlayingViewModel by viewModels()
-
-
     private val adapter =
         MovieAdapter { selectedMovie: Movie -> handleTheSelectedMovie(selectedMovie) }
-
     private fun handleTheSelectedMovie(selectedMovie: Movie) {
                     Toast.makeText(
                         this@NowPlayingFragment.context,
                         "${selectedMovie.title}",
                         Toast.LENGTH_SHORT
                     ).show()
-
     }
 
     private var _binding: FragmentNowPlayingBinding? = null
@@ -51,7 +47,6 @@ class NowPlayingFragment : Fragment() {
         _binding = FragmentNowPlayingBinding.inflate(inflater, container, false)
 
         setUpAdapter()
-
         lifecycleScope.launch {
             viewModel.resultNowPlaying?.collectLatest {
                     adapter.submitData(it)

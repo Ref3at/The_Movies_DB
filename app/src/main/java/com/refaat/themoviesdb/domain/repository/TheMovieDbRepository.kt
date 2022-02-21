@@ -8,25 +8,18 @@ import kotlinx.coroutines.flow.Flow
 
 interface TheMovieDbRepository {
 
-//    suspend fun getGenreNameById(genreId:Int): String
+    //    suspend fun getGenreNameById(genreId:Int): String
 //
- fun getMoviesNowPlaying(): Flow<PagingData<Movie>>
+    fun getMoviesNowPlaying(): Flow<PagingData<Movie>>
+    fun getMoviesPopular(): Flow<PagingData<Movie>>
 
 
-
-//    suspend fun getMoviesPopular(): List<Movie>
 //    suspend fun getMoviesTopRated(): List<Movie>
 //    suspend fun getMoviesUpcoming(): List<Movie>
 //
 //    suspend fun getMoviesForSearchQuery(searchQuery:String): List<Movie>
 //
 //    suspend fun getMovieDetail(movieId:Int): MovieDetail
-
-
-
-
-
-
 
 
 }
