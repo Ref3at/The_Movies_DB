@@ -57,7 +57,7 @@ class HomeFragment : Fragment() {
         val homeFragmentStateAdapter = HomeFragmentStateAdapter(fragmentList, this)
 
         binding.viewPager.adapter = homeFragmentStateAdapter
-        binding.viewPager.offscreenPageLimit = fragmentList.size
+        binding.viewPager.offscreenPageLimit = 1
         binding.viewPager.isUserInputEnabled = false
         binding.viewPager.isHorizontalScrollBarEnabled = false
 

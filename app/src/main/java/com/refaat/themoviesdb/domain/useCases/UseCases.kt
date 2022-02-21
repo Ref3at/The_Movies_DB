@@ -5,5 +5,6 @@ import java.security.cert.CertPathValidatorSpi
 data class UseCases(
     val getNowPlayingUseCase: GetNowPlayingUseCase,
     val getPopularUseCase: GetPopularUseCase,
-    val getTopRatedMoviesUseCase: GetTopRatedMoviesUseCase
+    val getTopRatedMoviesUseCase: GetTopRatedMoviesUseCase,
+    val getUpComingUseCase: GetUpComingUseCase
 )

@@ -12,7 +12,7 @@
         <entry key="app/src/main/res/layout/fragment_popular.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/fragment_top_rated.xml" value="0.28229166666666666" />
-        <entry key="app/src/main/res/layout/fragment_up_coming.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/fragment_up_coming.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_movie.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/network_state_item.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/network_state_layout.xml" value="0.22777777777777777" />

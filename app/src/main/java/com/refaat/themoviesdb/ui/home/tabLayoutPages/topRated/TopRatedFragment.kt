@@ -53,7 +53,7 @@ class TopRatedFragment : Fragment() {
         _binding = FragmentTopRatedBinding.inflate(inflater, container, false)
         setUpAdapter()
         lifecycleScope.launch {
-            viewModel.resultPopular?.collectLatest {
+            viewModel.resultTopRated?.collectLatest {
                 adapter.submitData(it)
             }
         }

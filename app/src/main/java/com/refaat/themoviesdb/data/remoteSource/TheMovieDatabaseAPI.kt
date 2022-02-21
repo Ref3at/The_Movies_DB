@@ -30,8 +30,8 @@ interface TheMovieDatabaseAPI {
     suspend fun getTopRatedMovies(@Query(PARAM_PAGE) page: Int):MoviesDto
 
     //Get Upcoming Movies
-    @GET("movie/top_rated")
-    suspend fun getUpcomingMovies(@Query(PARAM_PAGE) page: Int)
+    @GET("movie/upcoming")
+    suspend fun getUpcomingMovies(@Query(PARAM_PAGE) page: Int):MoviesDto
 
     //Get Search Movies
     @GET("search/movie")

@@ -4,10 +4,7 @@ import com.refaat.themoviesdb.data.remoteSource.CustomOkHttpClient
 import com.refaat.themoviesdb.data.remoteSource.TheMovieDatabaseAPI
 import com.refaat.themoviesdb.data.repository.TheMovieDbRepositoryImpl
 import com.refaat.themoviesdb.domain.repository.TheMovieDbRepository
-import com.refaat.themoviesdb.domain.useCases.GetNowPlayingUseCase
-import com.refaat.themoviesdb.domain.useCases.GetPopularUseCase
-import com.refaat.themoviesdb.domain.useCases.GetTopRatedMoviesUseCase
-import com.refaat.themoviesdb.domain.useCases.UseCases
+import com.refaat.themoviesdb.domain.useCases.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -52,7 +49,8 @@ class AppModule {
         return UseCases(
             getNowPlayingUseCase = GetNowPlayingUseCase(repository),
             getPopularUseCase = GetPopularUseCase(repository),
-            getTopRatedMoviesUseCase = GetTopRatedMoviesUseCase(repository)
+            getTopRatedMoviesUseCase = GetTopRatedMoviesUseCase(repository),
+            getUpComingUseCase = GetUpComingUseCase(repository)
         )
     }
 
