@@ -6,6 +6,7 @@ import com.refaat.themoviesdb.data.repository.TheMovieDbRepositoryImpl
 import com.refaat.themoviesdb.domain.repository.TheMovieDbRepository
 import com.refaat.themoviesdb.domain.useCases.GetNowPlayingUseCase
 import com.refaat.themoviesdb.domain.useCases.GetPopularUseCase
+import com.refaat.themoviesdb.domain.useCases.GetTopRatedMoviesUseCase
 import com.refaat.themoviesdb.domain.useCases.UseCases
 import dagger.Module
 import dagger.Provides
@@ -50,7 +51,8 @@ class AppModule {
     ): UseCases {
         return UseCases(
             getNowPlayingUseCase = GetNowPlayingUseCase(repository),
-            getPopularUseCase = GetPopularUseCase(repository)
+            getPopularUseCase = GetPopularUseCase(repository),
+            getTopRatedMoviesUseCase = GetTopRatedMoviesUseCase(repository)
         )
     }
 

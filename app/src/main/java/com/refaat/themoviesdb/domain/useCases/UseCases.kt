@@ -1,5 +1,9 @@
 package com.refaat.themoviesdb.domain.useCases
 
-data class UseCases(val getNowPlayingUseCase: GetNowPlayingUseCase,
-val getPopularUseCase: GetPopularUseCase) {
-}
+import java.security.cert.CertPathValidatorSpi
+
+data class UseCases(
+    val getNowPlayingUseCase: GetNowPlayingUseCase,
+    val getPopularUseCase: GetPopularUseCase,
+    val getTopRatedMoviesUseCase: GetTopRatedMoviesUseCase
+)

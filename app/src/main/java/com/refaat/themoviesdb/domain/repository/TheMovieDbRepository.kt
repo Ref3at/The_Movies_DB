@@ -12,9 +12,8 @@ interface TheMovieDbRepository {
 //
     fun getMoviesNowPlaying(): Flow<PagingData<Movie>>
     fun getMoviesPopular(): Flow<PagingData<Movie>>
+    fun getMoviesTopRated(): Flow<PagingData<Movie>>
 
-
-//    suspend fun getMoviesTopRated(): List<Movie>
 //    suspend fun getMoviesUpcoming(): List<Movie>
 //
 //    suspend fun getMoviesForSearchQuery(searchQuery:String): List<Movie>
