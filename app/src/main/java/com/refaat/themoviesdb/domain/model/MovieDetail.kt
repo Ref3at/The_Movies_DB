@@ -1,7 +1,11 @@
 package com.refaat.themoviesdb.domain.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
 class MovieDetail(
-    val id: Int?,
+    @PrimaryKey val id: Int?,
     val title: String?,
     val ratingCount: String?,
     val releaseDate: String?,

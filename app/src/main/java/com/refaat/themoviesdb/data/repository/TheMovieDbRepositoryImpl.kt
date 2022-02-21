@@ -4,6 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.refaat.themoviesdb.common.Resource
+import com.refaat.themoviesdb.data.TheMoviesDao
 import com.refaat.themoviesdb.data.pagingDataSources.NowPlayingMoviesPagingSource
 import com.refaat.themoviesdb.data.pagingDataSources.PopularMoviesPagingSource
 import com.refaat.themoviesdb.data.pagingDataSources.TopRatedMoviesPagingSource
@@ -17,7 +18,8 @@ import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 import java.io.IOException
 
-class TheMovieDbRepositoryImpl(private val theMovieDatabaseAPI: TheMovieDatabaseAPI) :
+class TheMovieDbRepositoryImpl(private val theMovieDatabaseAPI: TheMovieDatabaseAPI,
+                               private val dao: TheMoviesDao) :
     TheMovieDbRepository {
 
     companion object {

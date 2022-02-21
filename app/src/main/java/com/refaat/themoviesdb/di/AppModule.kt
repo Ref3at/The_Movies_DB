@@ -1,5 +1,8 @@
 package com.refaat.themoviesdb.di
 
+import android.app.Application
+import androidx.room.Room
+import com.refaat.themoviesdb.data.localSource.AppDataBase
 import com.refaat.themoviesdb.data.remoteSource.CustomOkHttpClient
 import com.refaat.themoviesdb.data.remoteSource.TheMovieDatabaseAPI
 import com.refaat.themoviesdb.data.repository.TheMovieDbRepositoryImpl
@@ -16,6 +19,15 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class AppModule {
+
+
+    @Provides
+    @Singleton
+    fun providesAppDataBase(app: Application): AppDataBase {
+        return Room.databaseBuilder(app, AppDataBase::class.java, AppDataBase.DATABASE_NAME)
+            .fallbackToDestructiveMigration()
+            .build()
+    }
 
     @Provides
     @Singleton
@@ -36,9 +48,10 @@ class AppModule {
     @Provides
     @Singleton
     fun providesTheRepository(
+        appDataBase: AppDataBase,
         api: TheMovieDatabaseAPI
     ): TheMovieDbRepository {
-        return TheMovieDbRepositoryImpl(api)
+        return TheMovieDbRepositoryImpl(api, appDataBase.dao)
     }
 
     @Provides
