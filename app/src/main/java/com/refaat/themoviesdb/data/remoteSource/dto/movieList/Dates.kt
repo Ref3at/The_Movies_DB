@@ -1,4 +1,4 @@
-package com.refaat.themoviesdb.data.remoteSource.dto
+package com.refaat.themoviesdb.data.remoteSource.dto.movieList
 
 import com.google.gson.annotations.Expose
 

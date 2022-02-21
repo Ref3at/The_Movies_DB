@@ -9,6 +9,8 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.NavHostFragment
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.refaat.themoviesdb.R
@@ -19,6 +21,7 @@ import com.refaat.themoviesdb.databinding.FragmentUpComingBinding
 import com.refaat.themoviesdb.domain.model.Movie
 import com.refaat.themoviesdb.ui.adapters.MovieAdapter
 import com.refaat.themoviesdb.ui.adapters.MoviesLoadStateAdapter
+import com.refaat.themoviesdb.ui.home.HomeFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -33,13 +36,10 @@ class UpComingFragment : Fragment() {
         MovieAdapter { selectedMovie: Movie -> handleTheSelectedMovie(selectedMovie) }
 
     private fun handleTheSelectedMovie(selectedMovie: Movie) {
-        Toast.makeText(
-            this@UpComingFragment.context,
-            "${selectedMovie.title}",
-            Toast.LENGTH_SHORT
-        ).show()
+        val direction: NavDirections =
+            HomeFragmentDirections.actionHomeFragmentToDetailFragment(selectedMovie)
+        NavHostFragment.findNavController(this).navigate(direction)
     }
-
 
     private var _binding: FragmentUpComingBinding? = null
 

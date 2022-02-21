@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.recyclerview.widget.GridLayoutManager
 import java.text.SimpleDateFormat
 
-const val SPAN_COUNT = 3
+const val SPAN_COUNT = 2
 const val PARAM_PAGE = "page"
 const val PARAM_MOVIE_ID = "movie-id"
 const val PARAM_SEARCH_QUERY = "query"

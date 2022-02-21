@@ -1,6 +1,7 @@
 package com.refaat.themoviesdb.domain.repository
 
 import androidx.paging.PagingData
+import com.refaat.themoviesdb.common.Resource
 import com.refaat.themoviesdb.domain.model.Genre
 import com.refaat.themoviesdb.domain.model.Movie
 import com.refaat.themoviesdb.domain.model.MovieDetail
@@ -17,7 +18,7 @@ interface TheMovieDbRepository {
 //
 //    suspend fun getMoviesForSearchQuery(searchQuery:String): List<Movie>
 //
-//    suspend fun getMovieDetail(movieId:Int): MovieDetail
+    fun getMovieDetail(movieId:Int): Flow<Resource<MovieDetail>>
 
 
 }

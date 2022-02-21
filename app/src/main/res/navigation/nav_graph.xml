@@ -19,12 +19,19 @@
         <action
             android:id="@+id/action_homeFragment_to_aboutFragment"
             app:destination="@id/aboutFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.refaat.themoviesdb.ui.detail.DetailFragment"
-        android:label="Detail"
-        tools:layout="@layout/fragment_detail" />
+        android:label="The movie detail"
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="SelectedMovie"
+            app:argType="com.refaat.themoviesdb.domain.model.Movie" />
+    </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="com.refaat.themoviesdb.ui.favorites.FavoritesFragment"

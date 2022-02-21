@@ -1,4 +1,4 @@
-package com.refaat.themoviesdb.data.remoteSource.dto
+package com.refaat.themoviesdb.data.remoteSource.dto.movieList
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
@@ -52,11 +52,15 @@ data class MovieDto(
     var voteCount: Int? = null,
 ) {
     fun toMovie(): Movie {
+
         return Movie(
+            id = id,
             title = title,
             releaseDate = "Pub: ${sdf.format(sdfDto.parse(releaseDate))}",
             ratingCount = "$voteAverage ($voteCount)",
-            backdropImage = "$BASE_IMAGES_URL$posterPath"
-        )
+            posterImage = "$BASE_IMAGES_URL$posterPath",
+            backdropImage = "$BASE_IMAGES_URL$backdropPath",
+            genreIds = genreIds
+            )
     }
 }

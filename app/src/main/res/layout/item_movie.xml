@@ -19,7 +19,7 @@
             android:scaleType="fitXY"
             android:id="@+id/img_poster"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_140sdp"
+            android:layout_height="@dimen/_200sdp"
             android:src="@drawable/ic_image_placeholder_24" />
 
 
@@ -51,6 +51,16 @@
             android:layout_height="wrap_content"
             android:text="released at 12/11/2020" />
 
+        <TextView
+            android:textStyle="italic"
+            android:textSize="@dimen/_9ssp"
+            android:lines="1"
+            android:maxLines="1"
+            style="@style/TextAppearance.MaterialComponents.Body2"
+            android:id="@+id/txt_genre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Action, Adventure, Science Fiction" />
 
         <LinearLayout
             android:layout_width="match_parent"

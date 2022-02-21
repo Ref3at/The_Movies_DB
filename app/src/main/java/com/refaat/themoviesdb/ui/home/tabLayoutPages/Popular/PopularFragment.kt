@@ -9,6 +9,8 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.NavHostFragment
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.refaat.themoviesdb.R
@@ -19,6 +21,7 @@ import com.refaat.themoviesdb.databinding.FragmentPopularBinding
 import com.refaat.themoviesdb.domain.model.Movie
 import com.refaat.themoviesdb.ui.adapters.MovieAdapter
 import com.refaat.themoviesdb.ui.adapters.MoviesLoadStateAdapter
+import com.refaat.themoviesdb.ui.home.HomeFragmentDirections
 import com.refaat.themoviesdb.ui.home.tabLayoutPages.nowPlaying.NowPlayingViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -31,11 +34,9 @@ class PopularFragment : Fragment() {
     private val adapter =
         MovieAdapter { selectedMovie: Movie -> handleTheSelectedMovie(selectedMovie) }
     private fun handleTheSelectedMovie(selectedMovie: Movie) {
-        Toast.makeText(
-            this@PopularFragment.context,
-            "${selectedMovie.title}",
-            Toast.LENGTH_SHORT
-        ).show()
+        val direction: NavDirections =
+            HomeFragmentDirections.actionHomeFragmentToDetailFragment(selectedMovie)
+        NavHostFragment.findNavController(this).navigate(direction)
     }
 
 

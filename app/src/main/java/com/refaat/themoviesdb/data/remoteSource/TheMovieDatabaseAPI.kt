@@ -1,8 +1,10 @@
 package com.refaat.themoviesdb.data.remoteSource
 
 import com.refaat.themoviesdb.common.*
-import com.refaat.themoviesdb.data.remoteSource.dto.MoviesDto
+import com.refaat.themoviesdb.data.remoteSource.dto.movieDetail.MovieDetailDto
+import com.refaat.themoviesdb.data.remoteSource.dto.movieList.MoviesDto
 import com.refaat.themoviesdb.domain.model.Genre
+import com.refaat.themoviesdb.domain.model.MovieDetail
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -23,15 +25,15 @@ interface TheMovieDatabaseAPI {
 
     //Get Popular Movies
     @GET("movie/popular")
-    suspend fun getPopularMovies(@Query(PARAM_PAGE) page: Int):MoviesDto
+    suspend fun getPopularMovies(@Query(PARAM_PAGE) page: Int): MoviesDto
 
     //Get Top Rated Movies
     @GET("movie/top_rated")
-    suspend fun getTopRatedMovies(@Query(PARAM_PAGE) page: Int):MoviesDto
+    suspend fun getTopRatedMovies(@Query(PARAM_PAGE) page: Int): MoviesDto
 
     //Get Upcoming Movies
     @GET("movie/upcoming")
-    suspend fun getUpcomingMovies(@Query(PARAM_PAGE) page: Int):MoviesDto
+    suspend fun getUpcomingMovies(@Query(PARAM_PAGE) page: Int): MoviesDto
 
     //Get Search Movies
     @GET("search/movie")
@@ -42,5 +44,5 @@ interface TheMovieDatabaseAPI {
 
     //Get Movie Detail
     @GET("movie/{$PARAM_MOVIE_ID}")
-    suspend fun getMovieDetail(@Path(PARAM_MOVIE_ID) movieId: Int)
+    suspend fun getMovieDetail(@Path(PARAM_MOVIE_ID) movieId: Int): MovieDetailDto
 }

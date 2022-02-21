@@ -50,7 +50,8 @@ class AppModule {
             getNowPlayingUseCase = GetNowPlayingUseCase(repository),
             getPopularUseCase = GetPopularUseCase(repository),
             getTopRatedMoviesUseCase = GetTopRatedMoviesUseCase(repository),
-            getUpComingUseCase = GetUpComingUseCase(repository)
+            getUpComingUseCase = GetUpComingUseCase(repository),
+            getMovieDetailUseCase = GetMovieDetailUseCase(repository)
         )
     }
 

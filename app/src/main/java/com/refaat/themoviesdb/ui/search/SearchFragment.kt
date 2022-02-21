@@ -37,9 +37,9 @@ class SearchFragment : Fragment() {
     private fun clicksConfig() {
 
         binding.btnDetail.setOnClickListener {
-            val direction: NavDirections =
-                SearchFragmentDirections.actionSearchFragmentToDetailFragment()
-            Navigation.findNavController(it).navigate(direction)
+//            val direction: NavDirections =
+//                SearchFragmentDirections.actionSearchFragmentToDetailFragment()
+//            Navigation.findNavController(it).navigate(direction)
         }
 
     }

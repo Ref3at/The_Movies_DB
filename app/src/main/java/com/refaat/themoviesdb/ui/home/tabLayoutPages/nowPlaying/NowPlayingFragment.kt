@@ -9,6 +9,9 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavDirections
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import com.refaat.themoviesdb.common.GridSpacingItemDecoration
@@ -18,6 +21,9 @@ import com.refaat.themoviesdb.databinding.FragmentNowPlayingBinding
 import com.refaat.themoviesdb.domain.model.Movie
 import com.refaat.themoviesdb.ui.adapters.MovieAdapter
 import com.refaat.themoviesdb.ui.adapters.MoviesLoadStateAdapter
+import com.refaat.themoviesdb.ui.favorites.FavoritesFragmentDirections
+import com.refaat.themoviesdb.ui.home.HomeFragment
+import com.refaat.themoviesdb.ui.home.HomeFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -31,11 +37,9 @@ class NowPlayingFragment : Fragment() {
         MovieAdapter { selectedMovie: Movie -> handleTheSelectedMovie(selectedMovie) }
 
     private fun handleTheSelectedMovie(selectedMovie: Movie) {
-        Toast.makeText(
-            this@NowPlayingFragment.context,
-            "${selectedMovie.title}",
-            Toast.LENGTH_SHORT
-        ).show()
+        val direction: NavDirections =
+            HomeFragmentDirections.actionHomeFragmentToDetailFragment(selectedMovie)
+        findNavController(this).navigate(direction)
     }
 
     private var _binding: FragmentNowPlayingBinding? = null
@@ -68,7 +72,7 @@ class NowPlayingFragment : Fragment() {
         binding.recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = getTheRecyclerViewLayoutManager(this@NowPlayingFragment.context)
-            addItemDecoration(getTheRecyclerViewItemDecoration(30,true))
+            addItemDecoration(getTheRecyclerViewItemDecoration(30, true))
         }
         binding.recyclerView.adapter = adapter.withLoadStateFooter(
             footer = MoviesLoadStateAdapter { retry() }

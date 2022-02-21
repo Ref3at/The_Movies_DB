@@ -9,6 +9,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import com.refaat.themoviesdb.R
 import com.refaat.themoviesdb.databinding.FragmentFavoritesBinding
+import com.refaat.themoviesdb.domain.model.Movie
 import com.refaat.themoviesdb.ui.home.HomeFragmentDirections
 import com.refaat.themoviesdb.ui.search.SearchFragmentDirections
 
@@ -44,11 +45,11 @@ class FavoritesFragment : Fragment() {
 
     private fun clicksConfig() {
 
-        binding.btnDetail.setOnClickListener {
-            val direction: NavDirections =
-                FavoritesFragmentDirections.actionFavoritesFragmentToDetailFragment()
-            Navigation.findNavController(it).navigate(direction)
-        }
+//        binding.btnDetail.setOnClickListener {
+//            val direction: NavDirections =
+//                FavoritesFragmentDirections.actionFavoritesFragmentToDetailFragment(Movie())
+//            Navigation.findNavController(it).navigate(direction)
+//        }
 
     }
 

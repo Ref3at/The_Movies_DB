@@ -36,7 +36,7 @@ class MovieAdapter(private val selectedMovie: (Movie) -> Unit) :
             binding.txtRatingCount.text = movie.ratingCount
 
             Glide.with(itemView.context)
-                .load(movie.backdropImage)
+                .load(movie.posterImage)
                 .placeholder(R.drawable.ic_image_placeholder_24)
                 .error(R.drawable.ic_image_placeholder_24)
                 .diskCacheStrategy(DiskCacheStrategy.DATA)
