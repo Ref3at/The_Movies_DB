@@ -2,6 +2,9 @@ package com.refaat.themoviesdb.data.remoteSource.dto
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import com.refaat.themoviesdb.common.BASE_IMAGES_URL
+import com.refaat.themoviesdb.common.sdf
+import com.refaat.themoviesdb.common.sdfDto
 import com.refaat.themoviesdb.domain.model.Movie
 
 data class MovieDto(
@@ -49,8 +52,11 @@ data class MovieDto(
     var voteCount: Int? = null,
 ) {
     fun toMovie(): Movie {
-        return Movie(title = title,
-        releaseDate = releaseDate,
-        ratingCount = "$voteAverage ($voteCount)" )
+        return Movie(
+            title = title,
+            releaseDate = "Pub: ${sdf.format(sdfDto.parse(releaseDate))}",
+            ratingCount = "$voteAverage ($voteCount)",
+            backdropImage = "$BASE_IMAGES_URL$posterPath"
+        )
     }
 }

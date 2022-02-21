@@ -1,33 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/_5sdp">
 
 
-    <ImageView
-        android:id="@+id/img_poster"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_130sdp"
-        android:src="@drawable/ic_image_placeholder_24" />
-
-    <TextView
-        android:id="@+id/txt_title"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Spider Man" />
+        android:orientation="vertical"
+      >
 
-    <TextView
-        android:id="@+id/txt_release_date"
+
+        <ImageView
+            android:scaleType="fitXY"
+            android:id="@+id/img_poster"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_140sdp"
+            android:src="@drawable/ic_image_placeholder_24" />
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="released at 12/11/2020" />
+        android:orientation="vertical"
+        android:padding="@dimen/_5sdp"
 
-    <TextView
-        android:id="@+id/txt_rating_count"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Rating (4.2) 1550" />
+        >
+
+        <TextView
+            android:lines="1"
+            android:maxLines="1"
+            android:textSize="@dimen/_11ssp"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:id="@+id/txt_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Spider Man" />
+
+        <TextView
+            android:textSize="@dimen/_10ssp"
+            android:lines="1"
+            android:maxLines="1"
+            style="@style/TextAppearance.MaterialComponents.Body2"
+            android:id="@+id/txt_release_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="released at 12/11/2020" />
 
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center|end"
+            >
+
+
+            <ImageView
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:src="@drawable/ic_star_rate_24"/>
+            <TextView
+                android:paddingStart="@dimen/_3sdp"
+                android:textSize="@dimen/_10ssp"
+                android:lines="1"
+                android:maxLines="1"
+                style="@style/TextAppearance.MaterialComponents.Body2"
+                android:id="@+id/txt_rating_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rating (4.2) 1550" />
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+</com.google.android.material.card.MaterialCardView>
+
+

@@ -17,6 +17,8 @@ import javax.inject.Inject
 class NowPlayingViewModel @Inject constructor(private val useCases: UseCases) :
     ViewModel() {
 
+    var hasLoadingError: Boolean = false
+
     var resultNowPlaying: Flow<PagingData<Movie>>? = null
 
     init {

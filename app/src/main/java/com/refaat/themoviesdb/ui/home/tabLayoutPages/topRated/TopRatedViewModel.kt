@@ -17,6 +17,8 @@ import javax.inject.Inject
 class TopRatedViewModel @Inject constructor(private val useCases: UseCases) :
     ViewModel() {
 
+    var hasLoadingError: Boolean = false
+
     var resultTopRated: Flow<PagingData<Movie>>? = null
 
     init {

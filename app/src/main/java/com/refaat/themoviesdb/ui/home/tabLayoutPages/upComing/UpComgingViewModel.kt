@@ -21,6 +21,8 @@ import javax.inject.Inject
 class UpComgingViewModel @Inject constructor(private val useCases: UseCases) :
     ViewModel() {
 
+    var hasLoadingError: Boolean = false
+
 
     var resultUpComing: Flow<PagingData<Movie>>? = null
 

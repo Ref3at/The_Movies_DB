@@ -1,10 +1,13 @@
 package com.refaat.themoviesdb.ui.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.refaat.themoviesdb.R
 import com.refaat.themoviesdb.databinding.ItemMovieBinding
 import com.refaat.themoviesdb.domain.model.Movie
@@ -31,6 +34,14 @@ class MovieAdapter(private val selectedMovie: (Movie) -> Unit) :
             binding.txtTitle.text = movie.title
             binding.txtReleaseDate.text = movie.releaseDate
             binding.txtRatingCount.text = movie.ratingCount
+
+            Glide.with(itemView.context)
+                .load(movie.backdropImage)
+                .placeholder(R.drawable.ic_image_placeholder_24)
+                .error(R.drawable.ic_image_placeholder_24)
+                .diskCacheStrategy(DiskCacheStrategy.DATA)
+                .into(binding.imgPoster)
+
 
         }
     }

@@ -12,6 +12,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.refaat.themoviesdb.R
+import com.refaat.themoviesdb.common.getTheRecyclerViewItemDecoration
+import com.refaat.themoviesdb.common.getTheRecyclerViewLayoutManager
 import com.refaat.themoviesdb.databinding.FragmentHomeBinding
 import com.refaat.themoviesdb.databinding.FragmentTopRatedBinding
 import com.refaat.themoviesdb.domain.model.Movie
@@ -57,6 +59,10 @@ class TopRatedFragment : Fragment() {
                 adapter.submitData(it)
             }
         }
+        if (viewModel.hasLoadingError){
+            retry()
+        }
+
         return binding.root
     }
 
@@ -64,8 +70,9 @@ class TopRatedFragment : Fragment() {
     private fun setUpAdapter() {
 
         binding.recyclerView.apply {
-            layoutManager = LinearLayoutManager(this@TopRatedFragment.context)
             setHasFixedSize(true)
+            layoutManager = getTheRecyclerViewLayoutManager(this@TopRatedFragment.context)
+            addItemDecoration(getTheRecyclerViewItemDecoration(30,true))
         }
         binding.recyclerView.adapter = adapter.withLoadStateFooter(
             footer = MoviesLoadStateAdapter { retry() }
@@ -83,6 +90,9 @@ class TopRatedFragment : Fragment() {
                 val isListEmpty =
                     adapter.itemCount == 0
 
+                // to call adapter.retry every time the fragment is opened
+                // if there error at initial loading
+                viewModel.hasLoadingError = isListEmpty
 
                 // show empty list
                 binding.txtError.isVisible = isListEmpty
@@ -102,6 +112,7 @@ class TopRatedFragment : Fragment() {
 
                 errorState?.let {
                     binding.txtError.text = "\uD83D\uDE28 ${it.error.localizedMessage}"
+                    viewModel.hasLoadingError = true
 
 
                 }
@@ -113,6 +124,12 @@ class TopRatedFragment : Fragment() {
         adapter.retry()
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (viewModel.hasLoadingError){
+            retry()
+        }
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

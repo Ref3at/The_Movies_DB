@@ -17,7 +17,10 @@ import javax.inject.Inject
 class PopularViewModel @Inject constructor(private val useCases: UseCases) :
     ViewModel() {
 
+    var hasLoadingError: Boolean = false
+
     var resultPopular: Flow<PagingData<Movie>>? = null
+
 
     init {
         val newResult: Flow<PagingData<Movie>> =

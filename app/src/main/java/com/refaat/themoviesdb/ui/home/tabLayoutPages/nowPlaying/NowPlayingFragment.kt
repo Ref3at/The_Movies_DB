@@ -1,16 +1,19 @@
 package com.refaat.themoviesdb.ui.home.tabLayoutPages.nowPlaying
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
+import com.refaat.themoviesdb.common.GridSpacingItemDecoration
+import com.refaat.themoviesdb.common.getTheRecyclerViewItemDecoration
+import com.refaat.themoviesdb.common.getTheRecyclerViewLayoutManager
 import com.refaat.themoviesdb.databinding.FragmentNowPlayingBinding
 import com.refaat.themoviesdb.domain.model.Movie
 import com.refaat.themoviesdb.ui.adapters.MovieAdapter
@@ -26,12 +29,13 @@ class NowPlayingFragment : Fragment() {
     private val viewModel: NowPlayingViewModel by viewModels()
     private val adapter =
         MovieAdapter { selectedMovie: Movie -> handleTheSelectedMovie(selectedMovie) }
+
     private fun handleTheSelectedMovie(selectedMovie: Movie) {
-                    Toast.makeText(
-                        this@NowPlayingFragment.context,
-                        "${selectedMovie.title}",
-                        Toast.LENGTH_SHORT
-                    ).show()
+        Toast.makeText(
+            this@NowPlayingFragment.context,
+            "${selectedMovie.title}",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     private var _binding: FragmentNowPlayingBinding? = null
@@ -49,8 +53,11 @@ class NowPlayingFragment : Fragment() {
         setUpAdapter()
         lifecycleScope.launch {
             viewModel.resultNowPlaying?.collectLatest {
-                    adapter.submitData(it)
-                }
+                adapter.submitData(it)
+            }
+        }
+        if (viewModel.hasLoadingError) {
+            retry()
         }
 
         return binding.root
@@ -59,8 +66,9 @@ class NowPlayingFragment : Fragment() {
     private fun setUpAdapter() {
 
         binding.recyclerView.apply {
-            layoutManager = LinearLayoutManager(this@NowPlayingFragment.context)
             setHasFixedSize(true)
+            layoutManager = getTheRecyclerViewLayoutManager(this@NowPlayingFragment.context)
+            addItemDecoration(getTheRecyclerViewItemDecoration(30,true))
         }
         binding.recyclerView.adapter = adapter.withLoadStateFooter(
             footer = MoviesLoadStateAdapter { retry() }
@@ -72,12 +80,15 @@ class NowPlayingFragment : Fragment() {
 
 
         lifecycleScope.launch {
-            adapter.addLoadStateListener  { loadState ->
+            adapter.addLoadStateListener { loadState ->
 //                val isListEmpty =
 //                    loadState.refresh is LoadState.NotLoading && adapter.itemCount == 0
                 val isListEmpty =
-                  adapter.itemCount == 0
+                    adapter.itemCount == 0
 
+                // to call adapter.retry every time the fragment is opened
+                // if there error at initial loading
+                viewModel.hasLoadingError = isListEmpty
 
                 // show empty list
                 binding.txtError.isVisible = isListEmpty
@@ -97,8 +108,7 @@ class NowPlayingFragment : Fragment() {
 
                 errorState?.let {
                     binding.txtError.text = "\uD83D\uDE28 ${it.error.localizedMessage}"
-
-
+                    viewModel.hasLoadingError = true
                 }
             }
         }
@@ -108,6 +118,12 @@ class NowPlayingFragment : Fragment() {
         adapter.retry()
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (viewModel.hasLoadingError) {
+            retry()
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

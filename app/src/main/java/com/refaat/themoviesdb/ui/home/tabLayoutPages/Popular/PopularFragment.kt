@@ -12,6 +12,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.refaat.themoviesdb.R
+import com.refaat.themoviesdb.common.getTheRecyclerViewItemDecoration
+import com.refaat.themoviesdb.common.getTheRecyclerViewLayoutManager
 import com.refaat.themoviesdb.databinding.FragmentHomeBinding
 import com.refaat.themoviesdb.databinding.FragmentPopularBinding
 import com.refaat.themoviesdb.domain.model.Movie
@@ -59,6 +61,8 @@ class PopularFragment : Fragment() {
             }
         }
 
+
+
         return binding.root
     }
 
@@ -66,8 +70,9 @@ class PopularFragment : Fragment() {
     private fun setUpAdapter() {
 
         binding.recyclerView.apply {
-            layoutManager = LinearLayoutManager(this@PopularFragment.context)
             setHasFixedSize(true)
+            layoutManager = getTheRecyclerViewLayoutManager(this@PopularFragment.context)
+            addItemDecoration(getTheRecyclerViewItemDecoration(30,true))
         }
         binding.recyclerView.adapter = adapter.withLoadStateFooter(
             footer = MoviesLoadStateAdapter { retry() }
@@ -85,6 +90,9 @@ class PopularFragment : Fragment() {
                 val isListEmpty =
                     adapter.itemCount == 0
 
+                // to call adapter.retry every time the fragment is opened
+                // if there error at initial loading
+                viewModel.hasLoadingError = isListEmpty
 
                 // show empty list
                 binding.txtError.isVisible = isListEmpty
@@ -104,6 +112,7 @@ class PopularFragment : Fragment() {
 
                 errorState?.let {
                     binding.txtError.text = "\uD83D\uDE28 ${it.error.localizedMessage}"
+                    viewModel.hasLoadingError = true
 
 
                 }
@@ -115,6 +124,14 @@ class PopularFragment : Fragment() {
         adapter.retry()
     }
 
+
+
+    override fun onResume() {
+        super.onResume()
+        if (viewModel.hasLoadingError){
+            retry()
+        }
+    }
 
 
     override fun onDestroyView() {
