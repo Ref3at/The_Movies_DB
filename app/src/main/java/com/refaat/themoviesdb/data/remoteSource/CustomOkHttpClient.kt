@@ -15,7 +15,7 @@ object CustomOkHttpClient {
         val clientInterceptor = Interceptor { chain ->
             var request: Request = chain.request()
             val url: HttpUrl =
-                request.url.newBuilder().addQueryParameter("apiKey", BuildConfig.API_KEY).build()
+                request.url.newBuilder().addQueryParameter("api_key", BuildConfig.API_KEY).build()
             request = request.newBuilder().url(url).build()
             chain.proceed(request)
         }

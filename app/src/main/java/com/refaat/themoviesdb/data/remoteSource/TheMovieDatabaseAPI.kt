@@ -1,6 +1,7 @@
 package com.refaat.themoviesdb.data.remoteSource
 
 import com.refaat.themoviesdb.common.*
+import com.refaat.themoviesdb.data.remoteSource.dto.MoviesDto
 import com.refaat.themoviesdb.domain.model.Genre
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -9,7 +10,7 @@ import retrofit2.http.Query
 interface TheMovieDatabaseAPI {
 
     companion object {
-        const val BASE_URL = "https://api.themoviedb.org/3"
+        const val BASE_URL = "https://api.themoviedb.org/3/"
     }
 
     //Get genre List
@@ -18,7 +19,7 @@ interface TheMovieDatabaseAPI {
 
     //Get Now Playing Movies
     @GET("movie/now_playing")
-    suspend fun getNowPlaying(@Query(PARAM_PAGE) page: Int)
+    suspend fun getNowPlaying(@Query(PARAM_PAGE) page: Int): MoviesDto
 
     //Get Popular Movies
     @GET("movie/popular")

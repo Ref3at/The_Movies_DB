@@ -1,9 +1,24 @@
 package com.refaat.themoviesdb.data.remoteSource.dto
 
+import com.google.gson.annotations.Expose
+
+import com.google.gson.annotations.SerializedName
+
+
 data class MoviesDto(
-    val datesDto: DatesDto,
-    val page: Int,
-    val movieDtos: List<MovieDto>,
-    val total_pages: Int,
-    val total_results: Int
+    @SerializedName("dates")
+    @Expose
+    var dates: Dates? = null,
+    @SerializedName("page")
+    @Expose
+    var page: Int? = null,
+    @SerializedName("results")
+    @Expose
+    var movieDtos: List<MovieDto>,
+    @SerializedName("total_pages")
+    @Expose
+    var totalPages: Int? = null,
+    @SerializedName("total_results")
+    @Expose
+    var totalResults: Int? = null
 )

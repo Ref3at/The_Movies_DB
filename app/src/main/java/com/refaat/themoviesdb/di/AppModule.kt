@@ -2,6 +2,10 @@ package com.refaat.themoviesdb.di
 
 import com.refaat.themoviesdb.data.remoteSource.CustomOkHttpClient
 import com.refaat.themoviesdb.data.remoteSource.TheMovieDatabaseAPI
+import com.refaat.themoviesdb.data.repository.TheMovieDbRepositoryImpl
+import com.refaat.themoviesdb.domain.repository.TheMovieDbRepository
+import com.refaat.themoviesdb.domain.useCases.GetNowPlayingUseCase
+import com.refaat.themoviesdb.domain.useCases.UseCases
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,6 +32,22 @@ class AppModule {
             .addConverterFactory(GsonConverterFactory.create())
             .client(customOkHttpClient.getCustomOkHttpClient())
             .build().create(TheMovieDatabaseAPI::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun providesTheRepository(
+        api: TheMovieDatabaseAPI
+    ): TheMovieDbRepository {
+        return TheMovieDbRepositoryImpl(api)
+    }
+
+    @Provides
+    @Singleton
+    fun providesTheUseCases(
+        repository: TheMovieDbRepository
+    ): UseCases {
+        return UseCases(getNowPlayingUseCase = GetNowPlayingUseCase(repository))
     }
 
 }

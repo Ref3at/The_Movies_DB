@@ -1,4 +1,4 @@
-package com.refaat.themoviesdb.ui.home.tabLayoutPages
+package com.refaat.themoviesdb.ui.home.tabLayoutPages.upComing
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

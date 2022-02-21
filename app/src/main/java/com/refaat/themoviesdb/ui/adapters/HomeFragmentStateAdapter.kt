@@ -1,4 +1,4 @@
-package com.refaat.themoviesdb.ui.home
+package com.refaat.themoviesdb.ui.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter

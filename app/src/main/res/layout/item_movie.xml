@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <ImageView
+        android:id="@+id/img_poster"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_130sdp"
+        android:src="@drawable/ic_image_placeholder_24" />
+
+    <TextView
+        android:id="@+id/txt_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Spider Man" />
+
+    <TextView
+        android:id="@+id/txt_release_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="released at 12/11/2020" />
+
+    <TextView
+        android:id="@+id/txt_rating_count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Rating (4.2) 1550" />
+
+
+</LinearLayout>

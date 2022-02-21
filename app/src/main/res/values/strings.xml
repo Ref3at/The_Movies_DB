@@ -6,4 +6,7 @@
     <string name="favorites">Favorites</string>
     <string name="search">Search</string>
     <string name="delete_all">Delete All</string>
+    <string name="unknown">\?</string>
+    <string name="loading">Loading</string>
+    <string name="retry">Retry</string>
 </resources>

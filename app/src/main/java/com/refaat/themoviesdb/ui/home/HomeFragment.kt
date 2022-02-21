@@ -10,10 +10,11 @@ import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.google.android.material.tabs.TabLayoutMediator
 import com.refaat.themoviesdb.R
 import com.refaat.themoviesdb.databinding.FragmentHomeBinding
-import com.refaat.themoviesdb.ui.home.tabLayoutPages.NowPlayingFragment
-import com.refaat.themoviesdb.ui.home.tabLayoutPages.PopularFragment
-import com.refaat.themoviesdb.ui.home.tabLayoutPages.TopRatedFragment
-import com.refaat.themoviesdb.ui.home.tabLayoutPages.UpComingFragment
+import com.refaat.themoviesdb.ui.adapters.HomeFragmentStateAdapter
+import com.refaat.themoviesdb.ui.home.tabLayoutPages.nowPlaying.NowPlayingFragment
+import com.refaat.themoviesdb.ui.home.tabLayoutPages.Popular.PopularFragment
+import com.refaat.themoviesdb.ui.home.tabLayoutPages.topRated.TopRatedFragment
+import com.refaat.themoviesdb.ui.home.tabLayoutPages.upComing.UpComingFragment
 
 class HomeFragment : Fragment() {
 
@@ -75,10 +76,6 @@ class HomeFragment : Fragment() {
             override fun onTabUnselected(tab: TabLayout.Tab) {}
             override fun onTabReselected(tab: TabLayout.Tab) {}
         })
-
-
-
-
 
 
 
