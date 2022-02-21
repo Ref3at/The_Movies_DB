@@ -67,7 +67,8 @@ class AppModule {
             getMovieDetailUseCase = GetMovieDetailUseCase(repository),
             addMovieDetailToFavorites = AddMovieDetailToFavorites(repository),
             deleteMovieDetailFromFavorites = DeleteMovieDetailFromFavorites(repository),
-            getAllFavoritesMovies = GetAllFavoritesMovies(repository)
+            getAllFavoritesMovies = GetAllFavoritesMovies(repository),
+            deleteAllFavoritesMovies = DeleteAllFavoritesMovies(repository)
         )
     }
 

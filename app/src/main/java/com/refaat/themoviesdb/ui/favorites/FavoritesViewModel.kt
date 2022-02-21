@@ -23,11 +23,19 @@ class FavoritesViewModel @Inject constructor(private val useCases: UseCases) :
 
     var resultFavorites: MutableLiveData<List<Movie>> = MutableLiveData()
 
-    fun getAllFavoritesMovies(){
+    fun getAllFavoritesMovies() {
         viewModelScope.launch {
             useCases.getAllFavoritesMovies().collect {
                 resultFavorites.value = it
             }
+        }
+    }
+
+
+    fun deleteAllFavoritesMovies() {
+        viewModelScope.launch {
+            useCases.deleteAllFavoritesMovies()
+            getAllFavoritesMovies()
         }
     }
 

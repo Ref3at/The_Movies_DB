@@ -13,6 +13,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.paging.LoadState
 import androidx.paging.PagingData
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.refaat.themoviesdb.R
 import com.refaat.themoviesdb.common.getTheRecyclerViewItemDecoration
 import com.refaat.themoviesdb.common.getTheRecyclerViewLayoutManager
@@ -69,6 +70,9 @@ class FavoritesFragment : Fragment() {
         viewModel.resultFavorites.observe(viewLifecycleOwner, Observer {
             lifecycleScope.launch {
                 adapter.submitData(PagingData.from(it))
+                if (it.isEmpty()){
+                    binding.txtError.visibility = View.VISIBLE
+                }
             }
         })
 
@@ -77,7 +81,6 @@ class FavoritesFragment : Fragment() {
 
 
     private fun setUpAdapter() {
-
         binding.recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = getTheRecyclerViewLayoutManager(this@FavoritesFragment.context)
@@ -86,38 +89,14 @@ class FavoritesFragment : Fragment() {
         binding.recyclerView.adapter = adapter.withLoadStateFooter(
             footer = MoviesLoadStateAdapter { retry() }
         )
-
-
-        binding.retryButton.setOnClickListener { retry() }
-
-
-
         lifecycleScope.launch {
-            adapter.addLoadStateListener { loadState ->
-//                val isListEmpty =
-//                    loadState.refresh is LoadState.NotLoading && adapter.itemCount == 0
+            adapter.addLoadStateListener {
                 val isListEmpty =
                     adapter.itemCount == 0
-
                 // show empty list
                 binding.txtError.isVisible = isListEmpty
                 // Only show the list if refresh succeeds.
                 binding.recyclerView.isVisible = !isListEmpty
-                // Show loading spinner during initial load or refresh.
-                binding.progressBar.isVisible = loadState.source.refresh is LoadState.Loading
-                // Show the retry state if initial load or refresh fails.
-                binding.retryButton.isVisible = loadState.source.refresh is LoadState.Error
-
-                // Toast on any error, regardless of whether it came from RemoteMediator or PagingSource
-                val errorState = loadState.source.append as? LoadState.Error
-                    ?: loadState.source.prepend as? LoadState.Error
-                    ?: loadState.append as? LoadState.Error
-                    ?: loadState.prepend as? LoadState.Error
-                    ?: loadState.refresh as? LoadState.Error
-
-                errorState?.let {
-                    binding.txtError.text = "\uD83D\uDE28 ${it.error.localizedMessage}"
-                }
             }
         }
     }
@@ -129,7 +108,17 @@ class FavoritesFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_delete -> {
-                Toast.makeText(this.context, "Deleting all favorites...", Toast.LENGTH_SHORT).show()
+
+                MaterialAlertDialogBuilder(this@FavoritesFragment.requireContext())
+                    .setTitle("Delete all")
+                    .setMessage("Are you sure you want to delete all!")
+                    .setPositiveButton("Yes") { dialog, which ->
+                        // Respond to positive button press
+                        viewModel.deleteAllFavoritesMovies()
+                    }.setCancelable(true)
+                    .show()
+
+
             }
         }
         return super.onOptionsItemSelected(item)

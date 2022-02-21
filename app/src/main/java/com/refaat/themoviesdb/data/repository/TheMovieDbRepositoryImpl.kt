@@ -113,5 +113,9 @@ class TheMovieDbRepositoryImpl(
         emit(theMovieList)
     }
 
+    override suspend fun deleteAllFavoritesMovies() {
+        dao.deleteAllMoviesDetail()
+    }
+
 
 }

@@ -27,6 +27,7 @@ interface TheMovieDbRepository {
     suspend fun deleteMovieFromFavorites(movieDetail: MovieDetail)
 
     suspend fun getAllFavoritesMovies(): Flow<List<Movie>>
+    suspend fun deleteAllFavoritesMovies()
 
 
 }
