@@ -18,8 +18,10 @@ import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 import java.io.IOException
 
-class TheMovieDbRepositoryImpl(private val theMovieDatabaseAPI: TheMovieDatabaseAPI,
-                               private val dao: TheMoviesDao) :
+class TheMovieDbRepositoryImpl(
+    private val theMovieDatabaseAPI: TheMovieDatabaseAPI,
+    private val dao: TheMoviesDao
+) :
     TheMovieDbRepository {
 
     companion object {
@@ -70,7 +72,13 @@ class TheMovieDbRepositoryImpl(private val theMovieDatabaseAPI: TheMovieDatabase
         emit(Resource.Loading()) // to start show the progress bar
         try {
             val movieDetail = theMovieDatabaseAPI.getMovieDetail(movieId)
-            emit(Resource.Success(movieDetail.toMovieDetail()))
+
+            val isAddInTheFavorites = movieDetail.id?.let { dao.getMovieDetail(it) }
+
+            emit(Resource.Success(movieDetail.toMovieDetail().apply {
+                isFavorites = isAddInTheFavorites != null
+            }))
+
         } catch (e: HttpException) {
             emit(
                 Resource.Error(
@@ -85,6 +93,18 @@ class TheMovieDbRepositoryImpl(private val theMovieDatabaseAPI: TheMovieDatabase
             )
         }
 
+    }
+
+    override suspend fun addMovieToFavorites(movieDetail: MovieDetail) {
+        dao.insertMovieDetail(movieDetail)
+    }
+
+    override suspend fun getMovieFromFavorites(movieId: Int) {
+        dao.getMovieDetail(movieId)
+    }
+
+    override suspend fun deleteMovieFromFavorites(movieDetail: MovieDetail) {
+        dao.deleteMovieDetail(movieDetail)
     }
 
 

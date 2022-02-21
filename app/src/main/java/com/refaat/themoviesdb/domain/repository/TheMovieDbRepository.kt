@@ -21,4 +21,15 @@ interface TheMovieDbRepository {
     fun getMovieDetail(movieId:Int): Flow<Resource<MovieDetail>>
 
 
+
+    suspend fun addMovieToFavorites(movieDetail: MovieDetail)
+    suspend fun getMovieFromFavorites(movieId: Int)
+    suspend fun deleteMovieFromFavorites(movieDetail: MovieDetail)
+
+
+
+
+
+
+
 }

@@ -23,11 +23,10 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class DetailFragment : Fragment() {
     private val args: DetailFragmentArgs by navArgs()
-
-
     private val viewModel: DetailViewModel by viewModels()
-
     private var _binding: FragmentDetailBinding? = null
+
+    private lateinit var theMovieDetail: MovieDetail
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -61,7 +60,8 @@ class DetailFragment : Fragment() {
                     binding.progressBar.visibility = View.GONE
                     binding.retryButton.visibility = View.GONE
                     binding.txtError.visibility = View.GONE
-                    fillViewsFromMovieDetail(it.data!!)
+                    theMovieDetail = it.data!!
+                    fillViewsFromMovieDetail(it.data)
                 }
             }
 
@@ -71,6 +71,21 @@ class DetailFragment : Fragment() {
             fetchTheMovieDetail(theMovie.id)
         }
         fetchTheMovieDetail(theMovie.id)
+
+
+        binding.btnFavorites.setOnClickListener {
+
+            if (theMovieDetail.isFavorites){
+                viewModel.deleteMovieDetailFromFavorites(theMovieDetail)
+                binding.btnFavorites.text = "Add to favorites"
+                theMovieDetail.isFavorites = false
+            }else{
+                viewModel.addMovieDetailToFavorites(theMovieDetail)
+                binding.btnFavorites.text = "Remove from favorites"
+                theMovieDetail.isFavorites = true
+            }
+
+        }
 
 
         return binding.root

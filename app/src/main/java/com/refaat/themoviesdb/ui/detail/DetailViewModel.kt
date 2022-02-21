@@ -38,4 +38,16 @@ class DetailViewModel @Inject constructor(private val useCases: UseCases) :
     }
 
 
+    fun addMovieDetailToFavorites(movieDetail: MovieDetail) {
+        viewModelScope.launch {
+            useCases.addMovieDetailToFavorites(movieDetail)
+        }
+    }
+    fun deleteMovieDetailFromFavorites(movieDetail: MovieDetail) {
+        viewModelScope.launch {
+            useCases.deleteMovieDetailFromFavorites(movieDetail)
+        }
+    }
+
+
 }

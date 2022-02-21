@@ -7,5 +7,7 @@ data class UseCases(
     val getPopularUseCase: GetPopularUseCase,
     val getTopRatedMoviesUseCase: GetTopRatedMoviesUseCase,
     val getUpComingUseCase: GetUpComingUseCase,
-    val getMovieDetailUseCase: GetMovieDetailUseCase
+    val getMovieDetailUseCase: GetMovieDetailUseCase,
+    val addMovieDetailToFavorites: AddMovieDetailToFavorites,
+    val deleteMovieDetailFromFavorites: DeleteMovieDetailFromFavorites
 )

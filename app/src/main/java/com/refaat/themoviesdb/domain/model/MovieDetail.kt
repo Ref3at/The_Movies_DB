@@ -13,5 +13,5 @@ class MovieDetail(
     val genresString: String?,
     val posterImage: String?,
     val backdropImage: String?,
-    val isFavorites: Boolean = false
+    var isFavorites: Boolean = false
 )
