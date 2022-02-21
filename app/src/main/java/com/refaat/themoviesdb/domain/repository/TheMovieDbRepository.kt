@@ -15,21 +15,18 @@ interface TheMovieDbRepository {
     fun getMoviesPopular(): Flow<PagingData<Movie>>
     fun getMoviesTopRated(): Flow<PagingData<Movie>>
     fun getMoviesUpcoming(): Flow<PagingData<Movie>>
-//
+
+    //
 //    suspend fun getMoviesForSearchQuery(searchQuery:String): List<Movie>
 //
-    fun getMovieDetail(movieId:Int): Flow<Resource<MovieDetail>>
-
+    fun getMovieDetail(movieId: Int): Flow<Resource<MovieDetail>>
 
 
     suspend fun addMovieToFavorites(movieDetail: MovieDetail)
     suspend fun getMovieFromFavorites(movieId: Int)
     suspend fun deleteMovieFromFavorites(movieDetail: MovieDetail)
 
-
-
-
-
+    suspend fun getAllFavoritesMovies(): Flow<List<Movie>>
 
 
 }

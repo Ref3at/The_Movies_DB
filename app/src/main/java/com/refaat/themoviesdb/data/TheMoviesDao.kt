@@ -12,6 +12,9 @@ interface TheMoviesDao {
     @Query("SELECT * from MovieDetail WHERE id=:movieId")
     suspend fun getMovieDetail(movieId: Int): MovieDetail
 
+    @Query("SELECT * from MovieDetail")
+    suspend fun getAllMovies(): List<MovieDetail>
+
     @Delete
     suspend fun deleteMovieDetail(movieDetail: MovieDetail)
 

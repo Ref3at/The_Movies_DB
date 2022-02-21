@@ -9,5 +9,6 @@ data class UseCases(
     val getUpComingUseCase: GetUpComingUseCase,
     val getMovieDetailUseCase: GetMovieDetailUseCase,
     val addMovieDetailToFavorites: AddMovieDetailToFavorites,
-    val deleteMovieDetailFromFavorites: DeleteMovieDetailFromFavorites
+    val deleteMovieDetailFromFavorites: DeleteMovieDetailFromFavorites,
+    val getAllFavoritesMovies: GetAllFavoritesMovies
 )

@@ -12,7 +12,7 @@ data class Movie(
     val ratingCount: String?,
     val posterImage: String?,
     val backdropImage: String?,
-    var genreIds: List<Int>? = null
+    var genreString: String?
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readValue(Int::class.java.classLoader) as? Int,
@@ -21,8 +21,10 @@ data class Movie(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
-        TODO("genreIds")
-    )
+        parcel.readString()
+    ) {
+    }
+
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeValue(id)
         parcel.writeString(title)
@@ -30,6 +32,7 @@ data class Movie(
         parcel.writeString(ratingCount)
         parcel.writeString(posterImage)
         parcel.writeString(backdropImage)
+        parcel.writeString(genreString)
     }
 
     override fun describeContents(): Int {

@@ -60,7 +60,7 @@ data class MovieDto(
             ratingCount = "$voteAverage ($voteCount)",
             posterImage = "$BASE_IMAGES_URL$posterPath",
             backdropImage = "$BASE_IMAGES_URL$backdropPath",
-            genreIds = genreIds
+            genreString = genreIds?.joinToString()
             )
     }
 }

@@ -107,5 +107,11 @@ class TheMovieDbRepositoryImpl(
         dao.deleteMovieDetail(movieDetail)
     }
 
+    override suspend fun getAllFavoritesMovies(): Flow<List<Movie>> = flow {
+        val theSavedMovies = dao.getAllMovies()
+        val theMovieList = theSavedMovies.map { it.toMovie() }
+        emit(theMovieList)
+    }
+
 
 }

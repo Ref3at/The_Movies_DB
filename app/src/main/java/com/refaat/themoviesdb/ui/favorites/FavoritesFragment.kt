@@ -3,18 +3,44 @@ package com.refaat.themoviesdb.ui.favorites
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
+import androidx.paging.LoadState
+import androidx.paging.PagingData
 import com.refaat.themoviesdb.R
+import com.refaat.themoviesdb.common.getTheRecyclerViewItemDecoration
+import com.refaat.themoviesdb.common.getTheRecyclerViewLayoutManager
 import com.refaat.themoviesdb.databinding.FragmentFavoritesBinding
 import com.refaat.themoviesdb.domain.model.Movie
+import com.refaat.themoviesdb.ui.adapters.MovieAdapter
+import com.refaat.themoviesdb.ui.adapters.MoviesLoadStateAdapter
 import com.refaat.themoviesdb.ui.home.HomeFragmentDirections
+import com.refaat.themoviesdb.ui.home.tabLayoutPages.nowPlaying.NowPlayingViewModel
 import com.refaat.themoviesdb.ui.search.SearchFragmentDirections
+import dagger.hilt.EntryPoint
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
-
+@AndroidEntryPoint
 class FavoritesFragment : Fragment() {
+
+    private val viewModel: FavoritesViewModel by viewModels()
+    private val adapter =
+        MovieAdapter { selectedMovie: Movie -> handleTheSelectedMovie(selectedMovie) }
+
+    private fun handleTheSelectedMovie(selectedMovie: Movie) {
+        val direction: NavDirections =
+            FavoritesFragmentDirections.actionFavoritesFragmentToDetailFragment(selectedMovie)
+        NavHostFragment.findNavController(this).navigate(direction)
+    }
+
+
     private var _binding: FragmentFavoritesBinding? = null
 
     // This property is only valid between onCreateView and
@@ -38,32 +64,77 @@ class FavoritesFragment : Fragment() {
     ): View {
         _binding = FragmentFavoritesBinding.inflate(inflater, container, false)
 
-        clicksConfig()
+        setUpAdapter()
+        viewModel.getAllFavoritesMovies()
+        viewModel.resultFavorites.observe(viewLifecycleOwner, Observer {
+            lifecycleScope.launch {
+                adapter.submitData(PagingData.from(it))
+            }
+        })
 
         return binding.root
     }
 
-    private fun clicksConfig() {
 
-//        binding.btnDetail.setOnClickListener {
-//            val direction: NavDirections =
-//                FavoritesFragmentDirections.actionFavoritesFragmentToDetailFragment(Movie())
-//            Navigation.findNavController(it).navigate(direction)
-//        }
+    private fun setUpAdapter() {
 
+        binding.recyclerView.apply {
+            setHasFixedSize(true)
+            layoutManager = getTheRecyclerViewLayoutManager(this@FavoritesFragment.context)
+            addItemDecoration(getTheRecyclerViewItemDecoration(30, true))
+        }
+        binding.recyclerView.adapter = adapter.withLoadStateFooter(
+            footer = MoviesLoadStateAdapter { retry() }
+        )
+
+
+        binding.retryButton.setOnClickListener { retry() }
+
+
+
+        lifecycleScope.launch {
+            adapter.addLoadStateListener { loadState ->
+//                val isListEmpty =
+//                    loadState.refresh is LoadState.NotLoading && adapter.itemCount == 0
+                val isListEmpty =
+                    adapter.itemCount == 0
+
+                // show empty list
+                binding.txtError.isVisible = isListEmpty
+                // Only show the list if refresh succeeds.
+                binding.recyclerView.isVisible = !isListEmpty
+                // Show loading spinner during initial load or refresh.
+                binding.progressBar.isVisible = loadState.source.refresh is LoadState.Loading
+                // Show the retry state if initial load or refresh fails.
+                binding.retryButton.isVisible = loadState.source.refresh is LoadState.Error
+
+                // Toast on any error, regardless of whether it came from RemoteMediator or PagingSource
+                val errorState = loadState.source.append as? LoadState.Error
+                    ?: loadState.source.prepend as? LoadState.Error
+                    ?: loadState.append as? LoadState.Error
+                    ?: loadState.prepend as? LoadState.Error
+                    ?: loadState.refresh as? LoadState.Error
+
+                errorState?.let {
+                    binding.txtError.text = "\uD83D\uDE28 ${it.error.localizedMessage}"
+                }
+            }
+        }
     }
 
+    private fun retry() {
+        adapter.retry()
+    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_delete -> {
-            Toast.makeText(this.context,"Deleting all favorites...",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this.context, "Deleting all favorites...", Toast.LENGTH_SHORT).show()
             }
         }
         return super.onOptionsItemSelected(item)
 
     }
-
 
 
     override fun onDestroyView() {
