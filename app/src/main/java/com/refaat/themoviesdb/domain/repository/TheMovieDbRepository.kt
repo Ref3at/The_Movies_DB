@@ -2,14 +2,13 @@ package com.refaat.themoviesdb.domain.repository
 
 import androidx.paging.PagingData
 import com.refaat.themoviesdb.common.Resource
-import com.refaat.themoviesdb.domain.model.Genre
 import com.refaat.themoviesdb.domain.model.Movie
 import com.refaat.themoviesdb.domain.model.MovieDetail
 import kotlinx.coroutines.flow.Flow
 
 interface TheMovieDbRepository {
 
-    //    suspend fun getGenreNameById(genreId:Int): String
+    suspend fun getGenreNameById(genreId:Int): String
 //
     fun getMoviesNowPlaying(): Flow<PagingData<Movie>>
     fun getMoviesPopular(): Flow<PagingData<Movie>>

@@ -16,7 +16,7 @@ data class MovieDto(
     var backdropPath: String? = null,
     @SerializedName("genre_ids")
     @Expose
-    var genreIds: List<Int>? = null,
+    var genreIds: List<Int>?= null,
     @SerializedName("id")
     @Expose
     var id: Int? = null,
@@ -60,7 +60,8 @@ data class MovieDto(
             ratingCount = "$voteAverage ($voteCount)",
             posterImage = "$BASE_IMAGES_URL$posterPath",
             backdropImage = "$BASE_IMAGES_URL$backdropPath",
+            genreIds = genreIds,
             genreString = genreIds?.joinToString()
-            )
+        )
     }
 }

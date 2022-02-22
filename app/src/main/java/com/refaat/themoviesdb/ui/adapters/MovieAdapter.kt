@@ -34,6 +34,7 @@ class MovieAdapter(private val selectedMovie: (Movie) -> Unit) :
             binding.txtTitle.text = movie.title
             binding.txtReleaseDate.text = movie.releaseDate
             binding.txtRatingCount.text = movie.ratingCount
+            binding.txtGenre.text = movie.genreString
 
             Glide.with(itemView.context)
                 .load(movie.posterImage)

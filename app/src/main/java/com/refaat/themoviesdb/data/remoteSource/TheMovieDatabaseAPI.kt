@@ -1,10 +1,10 @@
 package com.refaat.themoviesdb.data.remoteSource
 
 import com.refaat.themoviesdb.common.*
+import com.refaat.themoviesdb.data.remoteSource.dto.GenreDto
 import com.refaat.themoviesdb.data.remoteSource.dto.movieDetail.MovieDetailDto
 import com.refaat.themoviesdb.data.remoteSource.dto.movieList.MoviesDto
 import com.refaat.themoviesdb.domain.model.Genre
-import com.refaat.themoviesdb.domain.model.MovieDetail
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -17,7 +17,7 @@ interface TheMovieDatabaseAPI {
 
     //Get genre List
     @GET("genre/movie/list")
-    suspend fun getGenreList(): List<Genre>
+    suspend fun getGenreList(): GenreDto
 
     //Get Now Playing Movies
     @GET("movie/now_playing")

@@ -5,10 +5,6 @@ import com.google.gson.annotations.Expose
 import com.refaat.themoviesdb.common.BASE_IMAGES_URL
 import com.refaat.themoviesdb.common.sdf
 import com.refaat.themoviesdb.common.sdfDto
-import com.refaat.themoviesdb.data.remoteSource.dto.movieDetail.BelongsToCollection
-import com.refaat.themoviesdb.data.remoteSource.dto.movieDetail.ProductionCompany
-import com.refaat.themoviesdb.data.remoteSource.dto.movieDetail.ProductionCountry
-import com.refaat.themoviesdb.data.remoteSource.dto.movieDetail.SpokenLanguage
 import com.refaat.themoviesdb.domain.model.Genre
 import com.refaat.themoviesdb.domain.model.MovieDetail
 
@@ -114,7 +110,7 @@ class MovieDetailDto(
             ratingCount = "$voteAverage ($voteCount)",
             releaseDate = "Pub: ${sdf.format(sdfDto.parse(this.releaseDate))}",
             overview = this.overview,
-            genresString = genres?.joinToString { it.name },
+            genresString = genres?.joinToString { it.name.toString() },
             posterImage = "$BASE_IMAGES_URL$posterPath",
             backdropImage = "$BASE_IMAGES_URL$backdropPath"
         )

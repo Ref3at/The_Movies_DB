@@ -28,6 +28,16 @@ class TheMovieDbRepositoryImpl(
         const val PAGE_SIZE = 20
     }
 
+    override suspend fun getGenreNameById(genreId: Int): String {
+        var genre = dao.getGenreNameById(genreId)
+        if (genre == null) {
+            val loadedGenres = theMovieDatabaseAPI.getGenreList()
+            dao.insertServerGenres(loadedGenres.genres)
+            genre = dao.getGenreNameById(genreId)
+        }
+        return genre?.name.toString()
+    }
+
     override fun getMoviesNowPlaying(): Flow<PagingData<Movie>> {
         return Pager(
             config = PagingConfig(

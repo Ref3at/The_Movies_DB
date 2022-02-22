@@ -1,6 +1,7 @@
 package com.refaat.themoviesdb.data
 
 import androidx.room.*
+import com.refaat.themoviesdb.domain.model.Genre
 import com.refaat.themoviesdb.domain.model.MovieDetail
 
 @Dao
@@ -20,5 +21,13 @@ interface TheMoviesDao {
 
     @Query("DELETE FROM MovieDetail")
     suspend fun deleteAllMoviesDetail()
+
+
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertServerGenres(genreList: List<Genre>)
+
+    @Query("SELECT * from Genre WHERE id=:genreId")
+    suspend fun getGenreNameById(genreId: Int): Genre?
 
 }

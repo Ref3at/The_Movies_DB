@@ -12,6 +12,7 @@ data class Movie(
     val ratingCount: String?,
     val posterImage: String?,
     val backdropImage: String?,
+    var genreIds: List<Int>?,
     var genreString: String?
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
@@ -21,6 +22,7 @@ data class Movie(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
+        TODO("genreIds"),
         parcel.readString()
     ) {
     }

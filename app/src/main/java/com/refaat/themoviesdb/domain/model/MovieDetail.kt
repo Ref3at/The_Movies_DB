@@ -26,6 +26,7 @@ class MovieDetail(
             ratingCount = ratingCount,
             posterImage = posterImage,
             backdropImage = backdropImage,
+            genreIds = null,
             genreString = genresString
         )
 
