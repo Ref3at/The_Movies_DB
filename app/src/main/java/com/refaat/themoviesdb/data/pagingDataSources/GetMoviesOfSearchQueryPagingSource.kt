@@ -37,7 +37,7 @@ class GetMoviesOfSearchQueryPagingSource(
             val response = service.getMoviesOfSearchQuery(searchQuery,position)
             val moviesDto = response.movieDtos
             val movies = moviesDto.map {
-                it.toMovie2()
+                it.toMovie()
             }
             val nextKey = if (movies.isEmpty()) {
                 null

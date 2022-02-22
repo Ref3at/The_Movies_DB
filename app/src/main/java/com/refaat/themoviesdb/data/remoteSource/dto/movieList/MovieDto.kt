@@ -1,5 +1,6 @@
 package com.refaat.themoviesdb.data.remoteSource.dto.movieList
 
+import android.util.Log
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import com.refaat.themoviesdb.common.BASE_IMAGES_URL
@@ -16,7 +17,7 @@ data class MovieDto(
     var backdropPath: String? = null,
     @SerializedName("genre_ids")
     @Expose
-    var genreIds: List<Int>?= null,
+    var genreIds: List<Int>,
     @SerializedName("id")
     @Expose
     var id: Int? = null,
@@ -52,20 +53,11 @@ data class MovieDto(
     var voteCount: Int? = null,
 ) {
     fun toMovie(): Movie {
-
-        return Movie(
-            id = id,
-            title = title,
-            releaseDate = "Pub: ${sdf.format(sdfDto.parse(releaseDate))}",
-            ratingCount = "$voteAverage ($voteCount)",
-            posterImage = "$BASE_IMAGES_URL$posterPath",
-            backdropImage = "$BASE_IMAGES_URL$backdropPath",
-            genreIds = genreIds,
-            genreString = genreIds?.joinToString()
-        )
-    }
-
-    fun toMovie2() : Movie{
+        releaseDate = if (releaseDate.isNullOrBlank()) {
+            "Pub: N/A"
+        } else {
+            "Pub: ${sdf.format(sdfDto.parse(releaseDate))}"
+        }
         return Movie(
             id = id,
             title = title,
@@ -74,7 +66,8 @@ data class MovieDto(
             posterImage = "$BASE_IMAGES_URL$posterPath",
             backdropImage = "$BASE_IMAGES_URL$backdropPath",
             genreIds = genreIds,
-            genreString = genreIds?.joinToString()
+            genreString = genreIds.joinToString()
         )
     }
+
 }

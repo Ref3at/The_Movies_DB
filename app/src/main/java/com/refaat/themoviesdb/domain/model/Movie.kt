@@ -12,7 +12,7 @@ data class Movie(
     val ratingCount: String?,
     val posterImage: String?,
     val backdropImage: String?,
-    var genreIds: List<Int>?,
+    var genreIds: List<Int>,
     var genreString: String?
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
@@ -22,7 +22,7 @@ data class Movie(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
-        TODO("genreIds"),
+        parcel.createIntList(),
         parcel.readString()
     ) {
     }
@@ -35,6 +35,7 @@ data class Movie(
         parcel.writeString(posterImage)
         parcel.writeString(backdropImage)
         parcel.writeString(genreString)
+        parcel.writeIntList(genreIds)
     }
 
     override fun describeContents(): Int {
@@ -50,4 +51,20 @@ data class Movie(
             return arrayOfNulls(size)
         }
     }
+
+
+}
+
+fun Parcel.createIntList(): List<Int> {
+    val size = readInt()
+    val output = ArrayList<Int>(size)
+    for (i in 0 until size) {
+        output.add(readInt())
+    }
+    return output
+}
+
+fun Parcel.writeIntList(input: List<Int>) {
+    writeInt(input.size) // Save number of elements.
+    input.forEach(this::writeInt) // Save each element.
 }
