@@ -9,4 +9,17 @@
     <string name="unknown">\?</string>
     <string name="loading">Loading</string>
     <string name="retry">Retry</string>
+    <string name="link_text_auto"><b>TheMovieDb app developed by Mohamed Refaat</b>\n\n
+      <b>Kindly reach me through these channels:</b>\n\n
+        Phone (UAE): +971589857008 \n
+        Phone (EGP): +201016520830 \n
+        Email: muhamedmahmmod@gmail.com \n
+        Github: https://github.com/Ref3at \n
+        Linkedin: https://www.linkedin.com/in/muhamed-refaat \n\n
+
+        <b>Find the updated CV from this url:</b>\n
+        https://mohamed-refaat.firebaseapp.com/RefaatResume.pdf\n\n
+        <b>Also find the apps portfolio from this url:</b>\n
+        https://sites.google.com/view/mohamed-refaat/apps\n\n\n
+    Thanks and regards.</string>
 </resources>
