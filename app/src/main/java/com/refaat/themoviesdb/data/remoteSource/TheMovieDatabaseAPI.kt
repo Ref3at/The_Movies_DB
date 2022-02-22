@@ -37,10 +37,10 @@ interface TheMovieDatabaseAPI {
 
     //Get Search Movies
     @GET("search/movie")
-    suspend fun getSearchMovies(
+    suspend fun getMoviesOfSearchQuery(
         @Query(PARAM_SEARCH_QUERY) searchQuery: String,
         @Query(PARAM_PAGE) page: Int
-    )
+    ):MoviesDto
 
     //Get Movie Detail
     @GET("movie/{$PARAM_MOVIE_ID}")

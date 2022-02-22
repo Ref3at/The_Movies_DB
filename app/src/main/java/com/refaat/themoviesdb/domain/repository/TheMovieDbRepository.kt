@@ -1,5 +1,6 @@
 package com.refaat.themoviesdb.domain.repository
 
+import androidx.lifecycle.LiveData
 import androidx.paging.PagingData
 import com.refaat.themoviesdb.common.Resource
 import com.refaat.themoviesdb.domain.model.Movie
@@ -8,18 +9,15 @@ import kotlinx.coroutines.flow.Flow
 
 interface TheMovieDbRepository {
 
-    suspend fun getGenreNameById(genreId:Int): String
-//
+    suspend fun getGenreNameById(genreId: Int): String
+
     fun getMoviesNowPlaying(): Flow<PagingData<Movie>>
     fun getMoviesPopular(): Flow<PagingData<Movie>>
     fun getMoviesTopRated(): Flow<PagingData<Movie>>
     fun getMoviesUpcoming(): Flow<PagingData<Movie>>
+    fun getMoviesOfSearchQuery(searchQuery: String): LiveData<PagingData<Movie>>
 
-    //
-//    suspend fun getMoviesForSearchQuery(searchQuery:String): List<Movie>
-//
     fun getMovieDetail(movieId: Int): Flow<Resource<MovieDetail>>
-
 
     suspend fun addMovieToFavorites(movieDetail: MovieDetail)
     suspend fun getMovieFromFavorites(movieId: Int)

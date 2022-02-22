@@ -11,5 +11,6 @@ data class UseCases(
     val addMovieDetailToFavorites: AddMovieDetailToFavorites,
     val deleteMovieDetailFromFavorites: DeleteMovieDetailFromFavorites,
     val getAllFavoritesMovies: GetAllFavoritesMovies,
-    val deleteAllFavoritesMovies: DeleteAllFavoritesMovies
+    val deleteAllFavoritesMovies: DeleteAllFavoritesMovies,
+    val getMoviesOfSearchQueryUseCase: GetMoviesOfSearchQueryUseCase,
 )

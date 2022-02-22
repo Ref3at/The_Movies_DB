@@ -7,6 +7,7 @@
         <entry key="app/src/main/res/drawable/ic_favourite_outlined_24dp.xml" value="0.169" />
         <entry key="app/src/main/res/drawable/ic_image_placeholder_24.xml" value="0.1535" />
         <entry key="app/src/main/res/drawable/rounded_shape.xml" value="0.1985" />
+        <entry key="app/src/main/res/drawable/shape_search_background.xml" value="0.1895" />
         <entry key="app/src/main/res/drawable/sl_favourite_24dp.xml" value="0.169" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/fragment_about.xml" value="0.165" />
@@ -23,6 +24,7 @@
         <entry key="app/src/main/res/layout/network_state_layout.xml" value="0.22777777777777777" />
         <entry key="app/src/main/res/menu/favorites_menu.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/menu/main_menu.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/menu/search_menu.xml" value="0.375" />
       </map>
     </option>
   </component>

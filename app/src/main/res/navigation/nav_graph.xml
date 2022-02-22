@@ -44,7 +44,7 @@
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.refaat.themoviesdb.ui.search.SearchFragment"
-        android:label="Search"
+        android:label="Search movies"
         tools:layout="@layout/fragment_search" >
         <action
             android:id="@+id/action_searchFragment_to_detailFragment"

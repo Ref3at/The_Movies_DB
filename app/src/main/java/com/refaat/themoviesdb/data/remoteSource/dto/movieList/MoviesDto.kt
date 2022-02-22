@@ -6,9 +6,6 @@ import com.google.gson.annotations.SerializedName
 
 
 data class MoviesDto(
-    @SerializedName("dates")
-    @Expose
-    var dates: Dates? = null,
     @SerializedName("page")
     @Expose
     var page: Int? = null,

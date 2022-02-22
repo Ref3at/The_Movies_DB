@@ -1,14 +1,14 @@
 package com.refaat.themoviesdb.data.repository
 
+import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import androidx.paging.liveData
 import com.refaat.themoviesdb.common.Resource
 import com.refaat.themoviesdb.data.TheMoviesDao
-import com.refaat.themoviesdb.data.pagingDataSources.NowPlayingMoviesPagingSource
-import com.refaat.themoviesdb.data.pagingDataSources.PopularMoviesPagingSource
-import com.refaat.themoviesdb.data.pagingDataSources.TopRatedMoviesPagingSource
-import com.refaat.themoviesdb.data.pagingDataSources.UpComingMoviesPagingSource
+import com.refaat.themoviesdb.data.pagingDataSources.*
 import com.refaat.themoviesdb.data.remoteSource.TheMovieDatabaseAPI
 import com.refaat.themoviesdb.domain.model.Movie
 import com.refaat.themoviesdb.domain.model.MovieDetail
@@ -76,6 +76,19 @@ class TheMovieDbRepositoryImpl(
             ),
             pagingSourceFactory = { UpComingMoviesPagingSource(theMovieDatabaseAPI) }
         ).flow
+    }
+
+    override fun getMoviesOfSearchQuery(searchQuery: String): LiveData<PagingData<Movie>> {
+        Log.d("RepositoryImpl ", "New query: $searchQuery")
+        return Pager(
+            config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
+            pagingSourceFactory = {
+                GetMoviesOfSearchQueryPagingSource(
+                    theMovieDatabaseAPI,
+                    searchQuery
+                )
+            }
+        ).liveData
     }
 
     override fun getMovieDetail(movieId: Int): Flow<Resource<MovieDetail>> = flow {

@@ -64,4 +64,17 @@ data class MovieDto(
             genreString = genreIds?.joinToString()
         )
     }
+
+    fun toMovie2() : Movie{
+        return Movie(
+            id = id,
+            title = title,
+            releaseDate = releaseDate,
+            ratingCount = "$voteAverage ($voteCount)",
+            posterImage = "$BASE_IMAGES_URL$posterPath",
+            backdropImage = "$BASE_IMAGES_URL$backdropPath",
+            genreIds = genreIds,
+            genreString = genreIds?.joinToString()
+        )
+    }
 }
