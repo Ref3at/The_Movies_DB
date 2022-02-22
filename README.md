@@ -41,10 +41,10 @@ API_KEY="<YOUR_API_KEY>"
 ## App Screenshots
 
 <p float="left">
-<img src="screenshots/sc1.png" height="400" alt="Screenshot"/> 
-<img src="screenshots/sc2.png" height="400" alt="Screenshot"/> 
-<img src="screenshots/sc3.png" height="400" alt="Screenshot"/> 
-<img src="screenshots/sc4.png" height="400" alt="Screenshot"/> 
+<img src="screenshots/sc01.png" height="400" alt="Screenshot"/> 
+<img src="screenshots/sc02.png" height="400" alt="Screenshot"/> 
+<img src="screenshots/sc03.png" height="400" alt="Screenshot"/> 
+<img src="screenshots/sc04.png" height="400" alt="Screenshot"/> 
 </p>
 
 ## Roadmap
