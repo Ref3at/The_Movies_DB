@@ -43,8 +43,11 @@ API_KEY="<YOUR_API_KEY>"
 <p float="left">
 <img src="screenshots/sc01.png" height="400" alt="Screenshot"/> 
 <img src="screenshots/sc02.png" height="400" alt="Screenshot"/> 
-<img src="screenshots/sc03.png" height="400" alt="Screenshot"/> 
+<img src="screenshots/sc03.png" height="400" alt="Screenshot"/>  
+</p>
+<p float="left">
 <img src="screenshots/sc04.png" height="400" alt="Screenshot"/> 
+<img src="screenshots/sc05.png" height="400" alt="Screenshot"/>
 </p>
 
 ## Roadmap
