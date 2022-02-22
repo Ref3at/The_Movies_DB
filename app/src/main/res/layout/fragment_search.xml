@@ -23,7 +23,7 @@
             android:soundEffectsEnabled="true"
             app:defaultQueryHint="enter search keyword"
             app:iconifiedByDefault="false"
-            app:queryHint="enter country or currency name"
+            app:queryHint="enter search keyword"
             android:focusable="true"/>
 
 
