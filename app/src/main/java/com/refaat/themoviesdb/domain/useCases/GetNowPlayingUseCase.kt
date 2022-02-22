@@ -11,8 +11,7 @@ import kotlinx.coroutines.flow.map
 data class GetNowPlayingUseCase(private val repository: TheMovieDbRepository) {
 
     operator fun invoke(): Flow<PagingData<Movie>> {
-        val theFlowPagingData = repository.getMoviesNowPlaying()
-        return theFlowPagingData.map { pagingData ->
+        return repository.getMoviesNowPlaying().map { pagingData ->
             pagingData.map { movie ->
                 val genreListString: ArrayList<String> = arrayListOf()
                 movie.genreIds?.forEach {
