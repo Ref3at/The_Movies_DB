@@ -129,8 +129,4 @@ class TopRatedFragment : Fragment() {
             retry()
         }
     }
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }
