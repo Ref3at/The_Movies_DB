@@ -7,20 +7,7 @@
     android:orientation="vertical"
     tools:context=".ui.favorites.FavoritesFragment">
 
-
-    <TextView
-        android:text="It seems you don't have any favorites movies"
-        android:layout_gravity="center"
-        android:id="@+id/txt_error"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:textSize="@dimen/_11ssp"
-        android:visibility="gone" />
-
-
     <androidx.recyclerview.widget.RecyclerView
-
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -31,7 +18,23 @@
         app:layout_constraintVertical_bias="0.0"
         tools:listitem="@layout/item_movie" />
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
 
+    <TextView
+        android:id="@+id/txt_empty_result"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="It seems you don't have any favorites movies"
+        android:textSize="@dimen/_11ssp"
+        android:visibility="gone" />
 
 
 </FrameLayout>

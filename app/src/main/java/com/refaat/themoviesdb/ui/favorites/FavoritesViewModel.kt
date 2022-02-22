@@ -20,9 +20,7 @@ import javax.inject.Inject
 class FavoritesViewModel @Inject constructor(private val useCases: UseCases) :
     ViewModel() {
 
-
     var resultFavorites: MutableLiveData<List<Movie>> = MutableLiveData()
-
     fun getAllFavoritesMovies() {
         viewModelScope.launch {
             useCases.getAllFavoritesMovies().collect {
@@ -30,7 +28,6 @@ class FavoritesViewModel @Inject constructor(private val useCases: UseCases) :
             }
         }
     }
-
 
     fun deleteAllFavoritesMovies() {
         viewModelScope.launch {

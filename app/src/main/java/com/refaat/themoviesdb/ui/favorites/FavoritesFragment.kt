@@ -70,9 +70,7 @@ class FavoritesFragment : Fragment() {
         viewModel.resultFavorites.observe(viewLifecycleOwner, Observer {
             lifecycleScope.launch {
                 adapter.submitData(PagingData.from(it))
-                if (it.isEmpty()){
-                    binding.txtError.visibility = View.VISIBLE
-                }
+                binding.txtEmptyResult.isVisible = it.isEmpty()
             }
         })
 
@@ -89,16 +87,22 @@ class FavoritesFragment : Fragment() {
         binding.recyclerView.adapter = adapter.withLoadStateFooter(
             footer = MoviesLoadStateAdapter { retry() }
         )
-        lifecycleScope.launch {
-            adapter.addLoadStateListener {
-                val isListEmpty =
-                    adapter.itemCount == 0
-                // show empty list
-                binding.txtError.isVisible = isListEmpty
-                // Only show the list if refresh succeeds.
-                binding.recyclerView.isVisible = !isListEmpty
+
+        adapter.addLoadStateListener { loadState ->
+            binding.apply {
+                progressBar.isVisible = loadState.source.refresh is LoadState.Loading
+                recyclerView.isVisible = loadState.source.refresh is LoadState.NotLoading
+
+                // empty view
+                if (adapter.itemCount < 1) {
+                    recyclerView.isVisible = false
+                    txtEmptyResult.isVisible = true
+                } else {
+                    txtEmptyResult.isVisible = false
+                }
             }
         }
+
     }
 
     private fun retry() {
@@ -117,8 +121,6 @@ class FavoritesFragment : Fragment() {
                         viewModel.deleteAllFavoritesMovies()
                     }.setCancelable(true)
                     .show()
-
-
             }
         }
         return super.onOptionsItemSelected(item)

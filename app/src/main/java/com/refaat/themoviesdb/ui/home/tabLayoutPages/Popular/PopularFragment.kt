@@ -34,12 +34,12 @@ class PopularFragment : Fragment() {
     private val viewModel: PopularViewModel by viewModels()
     private val adapter =
         MovieAdapter { selectedMovie: Movie -> handleTheSelectedMovie(selectedMovie) }
+
     private fun handleTheSelectedMovie(selectedMovie: Movie) {
         val direction: NavDirections =
             HomeFragmentDirections.actionHomeFragmentToDetailFragment(selectedMovie)
         NavHostFragment.findNavController(this).navigate(direction)
     }
-
 
 
     private var _binding: FragmentPopularBinding? = null
@@ -55,11 +55,11 @@ class PopularFragment : Fragment() {
     ): View {
         _binding = FragmentPopularBinding.inflate(inflater, container, false)
 
-        Log.e("Fun : ","onCreateView")
+        Log.e("Fun : ", "onCreateView")
         setUpAdapter()
         lifecycleScope.launch {
             viewModel.resultPopular?.collectLatest {
-                Log.e("Fun : ","observe resultPopular")
+                Log.e("Fun : ", "observe resultPopular")
                 adapter.submitData(it)
             }
         }
@@ -73,52 +73,32 @@ class PopularFragment : Fragment() {
         binding.recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = getTheRecyclerViewLayoutManager(this@PopularFragment.context)
-            addItemDecoration(getTheRecyclerViewItemDecoration(30,true))
+            addItemDecoration(getTheRecyclerViewItemDecoration(30, true))
         }
         binding.recyclerView.adapter = adapter.withLoadStateFooter(
             footer = MoviesLoadStateAdapter { retry() }
         )
-
-
         binding.retryButton.setOnClickListener { retry() }
+        adapter.addLoadStateListener { loadState ->
+            binding.apply {
+                progressBar.isVisible = loadState.source.refresh is LoadState.Loading
+                recyclerView.isVisible = loadState.source.refresh is LoadState.NotLoading
+                retryButton.isVisible = loadState.source.refresh is LoadState.Error
 
-
-
-        lifecycleScope.launch {
-            adapter.addLoadStateListener  { loadState ->
-//                val isListEmpty =
-//                    loadState.refresh is LoadState.NotLoading && adapter.itemCount == 0
-                val isListEmpty =
-                    adapter.itemCount == 0
-
-                // to call adapter.retry every time the fragment is opened
-                // if there error at initial loading
-                viewModel.hasLoadingError = isListEmpty
-
-                // show empty list
-                binding.txtError.isVisible = isListEmpty
-                // Only show the list if refresh succeeds.
-                binding.recyclerView.isVisible = !isListEmpty
-                // Show loading spinner during initial load or refresh.
-                binding.progressBar.isVisible = loadState.source.refresh is LoadState.Loading
-                // Show the retry state if initial load or refresh fails.
-                binding.retryButton.isVisible = loadState.source.refresh is LoadState.Error
-
-                // Toast on any error, regardless of whether it came from RemoteMediator or PagingSource
+                // Show the error, regardless of whether it came from RemoteMediator or PagingSource
                 val errorState = loadState.source.append as? LoadState.Error
                     ?: loadState.source.prepend as? LoadState.Error
                     ?: loadState.append as? LoadState.Error
                     ?: loadState.prepend as? LoadState.Error
                     ?: loadState.refresh as? LoadState.Error
-
                 errorState?.let {
                     binding.txtError.text = "\uD83D\uDE28 ${it.error.localizedMessage}"
                     viewModel.hasLoadingError = true
-
-
                 }
+                txtError.isVisible = loadState.source.refresh is LoadState.Error
             }
         }
+
     }
 
     private fun retry() {
@@ -127,7 +107,7 @@ class PopularFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        if (viewModel.hasLoadingError){
+        if (viewModel.hasLoadingError) {
             retry()
         }
     }
